@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <style>
+        .music-player-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .music-player {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Vinyl_record.svg/1024px-Vinyl_record.svg.png') no-repeat center center;
+            background-size: cover;
+            animation: spin 0s linear infinite;
+        }
+        .music-player.playing {
+            animation: spin 3s linear infinite;
+        }
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .music-controls {
+            margin-top: 10px;
+        }
+        .play-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .play-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="music-player-container">
+        <div class="music-player" id="music-player"></div>
+        <div class="music-controls">
+            <button class="play-button" id="play-button" onclick="toggleMusic()">Play</button>
+        </div>
+    </div>
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung pemutar audio.
+    </audio>
+    <script>
+        const player = document.getElementById('music-player');
+        const audio = document.getElementById('bg-music');
+        const playButton = document.getElementById('play-button');
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                player.classList.add('playing');
+                playButton.textContent = 'Pause';
+            } else {
+                audio.pause();
+                player.classList.remove('playing');
+                playButton.textContent = 'Play';
+            }
+        }
+    </script>
+</body>
+</html>
